@@ -1,0 +1,34 @@
+#lang racket
+(define (big-add x y)
+  (big-add1 x y 0)
+  
+  )
+
+(define (big-add1 x y co)
+  (cond
+    ;; If both lists are empty, the return value is either 0 or the caryover value.
+    [(and (= 0 (length x)) (= 0 (length y)))
+      (if (= co 0) '() (list co))]
+    [(= 0 (length x))  (big-add1 (list co) y 0)]
+    [(= 0 (length y))  (big-add1 x (list co) 0)]
+    [else
+       ;;
+       ;; --- YOUR CODE HERE ---
+       ;;
+     
+
+    (cond
+      [(>= (+ (string->number (string(car (reverse(string->list (number->string(car (list x)))))))
+              (string->number (string(car (reverse(string->list (number->string(car (list y)))))))))) 10)
+       (big-add1(cdr x) (cdr y) 1)]
+
+
+      (map  number->string x)
+      (map string->list (map  number->string x))
+;;this is gna be repeated for each number in the list by recursion
+
+      (map string->number (map string (car (map reverse (map string->list (map  number->string '(901 2)))))))
+      
+
+
+      

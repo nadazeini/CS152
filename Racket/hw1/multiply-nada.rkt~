@@ -1,0 +1,22 @@
+#lang racket
+(define (multiply-big-int big int carry)
+    (cond
+      [(= 0 int) '(0)]
+      [(empty? big) '()]
+      ;if number of digits of product is bigger than the max of the cars
+      [(> (+ (exact-floor (log (* (car big) int) 10)) 1) (+ (exact-floor (log (max (car big) int) 10)) 1))
+       (cons (remainder (* (car big) int) (* 10 (exact-floor (log (max (car big) int) 10))))
+             (multiply-big-int (cdr big) int
+                               (-  (* (car big) int)
+                                   (remainder (* (car big) int)
+                                   (* 10 (exact-floor (log (max (car big) int) 10)))))))
+
+       
+          ]
+         ;get the carry
+         ;the carry formula is
+      
+         ;get last digits
+        ;(-  (* (car big) int) (% (* (car big) int) (* 10 (exact-floor (log (max (car big) x) 10)))))
+      [else (cons (+ carry (* (car big) int)) (multiply-big-int (cdr big) int 0))]))
+(multiply-big-int '(25) 8 0)

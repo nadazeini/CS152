@@ -1,0 +1,40 @@
+#lang racket
+(define (big-add1 x y co)
+  (cond
+    ;; If both lists are empty, the return value is either 0 or the caryover value.
+    [(and (= 0 (length x)) (= 0 (length y)))
+      (if (= co 0) '() (list co))]
+    [(= 0 (length x))  (big-add1 (list co) y 0)]
+    [(= 0 (length y))  (big-add1 x (list co) 0)]
+    [else
+    
+       ;;
+     (cond
+       [(length x) (length y)
+          
+   (cond
+   ;compare number of digits of the sum i equal to number of dig of biggest number adding
+   [(= (+ (floor (log (+ (car x) (car y)) 10)) 1) (let (( val (if (>=  (+ (exact-floor (log (car x) 10)) 1) (+ (exact-floor (log (car y) 10)) 1)) (+ (exact-floor (log (car x) 10)) 1) (+ (exact-floor (log (car y) 10)) 1)))) val))
+  (cons (+ co (+ (car x) (car y))) (big-add1 (cdr x) (cdr y) 0))]
+                                                           
+ ; if not equal
+ ; another cond
+  [else
+   (cons (- (+ co (+ (car x) (car y))) (expt 10   (- (+ (exact-floor (log (+ (car x) (car y)) 10)) 1) 1)))
+        (big-add1 (cdr x) (cdr y) 1))])]))
+
+(define (big-add x y)
+  (big-add1 x y 0)
+  
+  )
+
+
+(big-add '(999) '(456))
+;; 1,999 + 1,456
+(big-add '(999 1) '(456 1))
+;; 681,234,999 + 456
+;;(big-add '(999 234 681) '(456))
+;; 456 + 681,234,999
+;(big-add '(456) '(999 234 681))
+;; 681,000,999 + 456
+;(big-add '(999 0 681) '(456))

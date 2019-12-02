@@ -1,0 +1,50 @@
+> (map reverse (map string->list (map  number->string '(901 2))))
+'((#\1 #\0 #\9) (#\2))
+> (car (map reverse (map string->list (map  number->string '(901 2)))))
+'(#\1 #\0 #\9)
+> (map string (car (map reverse (map string->list (map  number->string '(901 2))))))
+'("1" "0" "9")
+> (map string->number (map string (car (map reverse (map string->list (map  number->string '(901 2)))))))
+'(1 0 9)
+
+
+
+
+  (cond
+      [(>= (+ (string->number (string(car (reverse(string->list (number->string(car (list x)))))))
+              (string->number (string(car (reverse(string->list (number->string(car (list y)))))))))) 10)
+       (big-add1(cdr x) (cdr y) 1)]
+
+
+      (map  number->string x)
+      (map string->list (map  number->string x))
+;;this is gna be repeated for each number in the list by recursion
+
+      (map string->number (map string (car (map reverse (map string->list (map  number->string '(901 2)))))))
+      (map string->number (map string (car (map reverse (map string->list (map  number->string '(123 7)))))))
+      (map (lambda (x y) (+ x y))
+(map (lambda (x y) (+ x y)) (map string->number (map string (car (map reverse
+(map string->list (map  number->string '(901 2)))))))
+     (map string->number (map string (car (map reverse (map string->list (map  number->string '(123 7))))))))
+'(4 2 10)
+
+           
+      ;;so far
+ (map (lambda (x y)
+         (cond [(>= (+ x y) 10)
+             (- (+ x y) 10)]
+             
+         [else (+ x y)]
+         ))
+
+             (map string->number (map string (car(map string->list (map  number->string '(901 2)))))) (map string->number (map string (car (map string->list (map  number->string '(123 7)))))))
+;; done
+
+;;trying to carry over the 1 to the next addition
+
+
+
+;; last function
+ (append (map string->list (map  number->string '(901 2))))
+'((#\9 #\0 #\1) (#\2))
+      
