@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="40e29630-edb8-49ab-9d02-287897c6b29a" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1RRo0D6Yv8DHokOd2EGlwrTYkgD" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/../cs152" />
+      <recent name="$PROJECT_DIR$/../cs152/labs" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Node.js.test1.js">
+    <configuration name="contracts.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/../cs152/hw3/contracts.js" working-dir="$PROJECT_DIR$/../cs152/hw3">
+      <method v="2" />
+    </configuration>
+    <configuration name="lab9_functional.js" type="NodeJSConfigurationType" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/../cs152/labs/lab9_functional.js" working-dir="$PROJECT_DIR$/../cs152">
+      <method v="2" />
+    </configuration>
+    <configuration name="lab9_student.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/../cs152/labs/lab9_student.js" working-dir="$PROJECT_DIR$/../cs152">
+      <method v="2" />
+    </configuration>
+    <configuration name="test1.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/../cs152/hw3/test1.js" working-dir="$PROJECT_DIR$/../cs152/hw3">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Node.js.test1.js" />
+        <item itemvalue="Node.js.contracts.js" />
+        <item itemvalue="Node.js.lab9_student.js" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="40e29630-edb8-49ab-9d02-287897c6b29a" name="Default Changelist" comment="" />
+      <created>1569639043500</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1569639043500</updated>
+      <workItem from="1569639047817" duration="2656000" />
+      <workItem from="1570856442668" duration="1192000" />
+      <workItem from="1571130767387" duration="135000" />
+      <workItem from="1571181166242" duration="174000" />
+      <workItem from="1571371020781" duration="1561000" />
+      <workItem from="1571712257246" duration="357000" />
+      <workItem from="1571884211135" duration="555000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+</project>

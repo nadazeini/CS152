@@ -1,0 +1,23 @@
+/*<!--<html>
+    <input
+    type = 'button'
+    onclick = 'alert("hello");'
+    value = 'say hi' />
+</html>-->*/
+
+
+
+<html>
+    <input id = 'button'
+    type = 'button'
+    value = 'Say Hi' />
+    <script type = "text/javascript">
+    var btn = document.getElementById('thebutton');
+    btn.onclick = function(){
+        alert('Groovy');
+    }
+    btn.addEventListener('click',sayGroovy);
+    btn.addEventListener('click',
+function(){ alert("Bogus");} );
+    </script>
+</html>
