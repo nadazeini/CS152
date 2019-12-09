@@ -1,0 +1,23 @@
+<html>
+     <input id='thebutton'
+           type='button'
+           value='Say hi'
+     /> 
+        <script type="text/javascript">
+            var btn = document. getElementById('thebutton');
+            //btn.onclick = function() { alert('Groovy'); };
+            //prehaps better:
+            function saySomething(){
+                alert('im saying something');
+                btn.removeEventListener(saySomething); //when you add this > it will execute the next after say something
+                //without this it only executes the first event listener
+            //JavaScript in a browser is sinle threaded
+            //AN EVENT RUNS TO COMPLETION BEFORE THE NEXT ONE BEGINS
+            }
+            function secondSomething(){
+                alert('second try saying');
+            }
+            btn.addEventListener('click',saySomething);
+            btn.addEventListener('click',secondSomething);
+        </script>
+</html>
