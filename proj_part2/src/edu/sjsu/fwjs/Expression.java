@@ -64,16 +64,48 @@ class BinOpExpr implements Expression {
     private Op op;
     private Expression e1;
     private Expression e2;
+
     public BinOpExpr(Op op, Expression e1, Expression e2) {
         this.op = op;
         this.e1 = e1;
         this.e2 = e2;
     }
 
+
     @SuppressWarnings("incomplete-switch")
+
     public Value evaluate(Environment env) {
-        // YOUR CODE HERE
-        return null;
+
+        int v1 = ((IntVal) e1.evaluate(env)).toInt();
+        int v2 = ((IntVal) e2.evaluate(env)).toInt();
+
+        switch (op) {
+            case LT:
+                return new BoolVal(v1 < v2);
+            case LE:
+                return new BoolVal(v1 <= v2);
+            case EQ:
+                return new BoolVal(v1 == v2);
+
+            case ADD:
+                return new IntVal(v1 + v2);
+            case SUBTRACT:
+                return new IntVal(v1 - v2);
+            case MULTIPLY:
+                return new IntVal(v1 * v2);
+            case DIVIDE:
+                return new IntVal(v1 / v2);
+            case MOD:
+                return new IntVal(v1 % v2);
+            case GT:
+                return new BoolVal(v1 > v2);
+            case GE:
+                return new BoolVal(v1 >= v2);
+
+            default:
+                return new NullVal();
+
+        }
     }
 }
 
@@ -85,15 +117,24 @@ class IfExpr implements Expression {
     private Expression cond;
     private Expression thn;
     private Expression els;
+
     public IfExpr(Expression cond, Expression thn, Expression els) {
         this.cond = cond;
         this.thn = thn;
         this.els = els;
     }
+
     public Value evaluate(Environment env) {
         // YOUR CODE HERE
-        return null;
+        if (((BoolVal) cond.evaluate(env)).toBoolean()) {
+            return thn.evaluate(env);
+        } else if (els != null) {
+            return els.evaluate(env);
+        }
+
+        return new NullVal();
     }
+
 }
 
 /**
@@ -102,13 +143,21 @@ class IfExpr implements Expression {
 class WhileExpr implements Expression {
     private Expression cond;
     private Expression body;
+
     public WhileExpr(Expression cond, Expression body) {
         this.cond = cond;
         this.body = body;
     }
+
     public Value evaluate(Environment env) {
         // YOUR CODE HERE
-        return null;
+        Value whileBody = new NullVal();
+
+        while (((BoolVal) cond.evaluate(env)).toBoolean()) {
+            whileBody = body.evaluate(env);
+        }
+        return whileBody;
+
     }
 }
 
@@ -118,13 +167,16 @@ class WhileExpr implements Expression {
 class SeqExpr implements Expression {
     private Expression e1;
     private Expression e2;
+
     public SeqExpr(Expression e1, Expression e2) {
         this.e1 = e1;
         this.e2 = e2;
     }
+
     public Value evaluate(Environment env) {
         // YOUR CODE HERE
-        return null;
+        e1.evaluate(env);
+        return e2.evaluate(env);
     }
 }
 
@@ -134,13 +186,17 @@ class SeqExpr implements Expression {
 class VarDeclExpr implements Expression {
     private String varName;
     private Expression exp;
+
     public VarDeclExpr(String varName, Expression exp) {
         this.varName = varName;
         this.exp = exp;
     }
+
     public Value evaluate(Environment env) {
         // YOUR CODE HERE
-        return null;
+        env.createVar(varName, exp.evaluate(env));
+        return env.resolveVar(varName);
+
     }
 }
 
@@ -152,13 +208,16 @@ class VarDeclExpr implements Expression {
 class AssignExpr implements Expression {
     private String varName;
     private Expression e;
+
     public AssignExpr(String varName, Expression e) {
         this.varName = varName;
         this.e = e;
     }
-    public Value evaluate(Environment env) {
-        // YOUR CODE HERE
-        return null;
+
+    public Value evaluate(Environment env) { //if the variable is not found will  go to global
+        //returns after update
+        env.updateVar(varName, e.evaluate(env));
+        return env.resolveVar(varName);
     }
 }
 
@@ -168,13 +227,16 @@ class AssignExpr implements Expression {
 class FunctionDeclExpr implements Expression {
     private List<String> params;
     private Expression body;
+
     public FunctionDeclExpr(List<String> params, Expression body) {
         this.params = params;
         this.body = body;
     }
+
     public Value evaluate(Environment env) {
-        // YOUR CODE HERE
-        return null;
+
+        return new ClosureVal(params, body, env);
+
     }
 }
 
@@ -184,13 +246,40 @@ class FunctionDeclExpr implements Expression {
 class FunctionAppExpr implements Expression {
     private Expression f;
     private List<Expression> args;
+
     public FunctionAppExpr(Expression f, List<Expression> args) {
         this.f = f;
         this.args = args;
     }
+
     public Value evaluate(Environment env) {
         // YOUR CODE HERE
-        return null;
+        ClosureVal val = (ClosureVal) f.evaluate(env);    // Evaluate f expression to get ClosureVal
+        List<Value> evalArgs = new ArrayList<Value>();    // List to hold evaluated values.
+
+        // Add evaluated Expressions from args to evalArgs to be used in the function.
+        for (int i = 0; i < args.size(); i++) {
+            evalArgs.add(args.get(i).evaluate(env));
+        }
+        // Apply the evaluated Expressions to the val function.
+        return val.apply(evalArgs);
+    }
+
+
+    /**
+     * A function declaration, which evaluates to a closure.
+     */
+    class AnonFunctionDeclExpr implements Expression {
+        private List<String> params;
+        private Expression body;
+        public AnonFunctionDeclExpr(List<String> params, Expression body) {
+            this.params = params;
+            this.body = body;
+        }
+        public Value evaluate(Environment env) {
+            return new ClosureVal(params, body, env);
+        }
     }
 }
+
 

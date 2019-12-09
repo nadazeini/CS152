@@ -1,7 +1,7 @@
 grammar FeatherweightJavaScript;
 
-
-//@header { package edu.sjsu.fwjs.parser; }
+//Nada 152 last
+@header { package edu.sjsu.fwjs.parser; }
 
 // Reserved words
 IF        : 'if' ;
@@ -22,7 +22,7 @@ DIV       : '/' ;
 SEPARATOR : ';' ;
 //added symbols:
 ASSIGN 	  : '=' ;
-ADD       : '+';
+PLUS       : '+'; //avoid add conf
 SUB       : '-';
 MOD       : '%';
 //comparision part
@@ -34,7 +34,7 @@ LE 		  : '<=';
 //identifiers: The rules for variable names in FWJS:
 //*The first character must be an alphabetic character or an underscore.
 //*The remaining characters must be alphabetic characters, numeric characters, or underscores.
-ID		  : [a-zA-Z_][a-zA-Z_0-9]*;
+IDENTIFIER		  : [a-zA-Z_][a-zA-Z_0-9]*;
 
 // Whitespace and comments
 NEWLINE   : '\r'? '\n' -> skip ;
@@ -48,31 +48,32 @@ BLOCK_COMMENT : '/*' .*? '*/' -> skip ;
 /** The start rule */
 prog: stat+ ;
 
-stat: expr SEPARATOR                                    # bareExpr
-    | IF '(' expr ')' block ELSE block                  # ifThenElse
-    | IF '(' expr ')' block                             # ifThen
-    | WHILE '(' expr ')' block                          # while
-    | PRINT '(' expr ')' SEPARATOR?                     # print
-    | SEPARATOR                                         # empty
-    ;
+stat:
+	expr SEPARATOR						    # bareExpr
+	| IF '(' expr ')' block ELSE block	    # ifThenElse
+	| IF '(' expr ')' block					# ifThen
+	| WHILE '(' expr ')' block				# while
+	| PRINT '(' expr ')' SEPARATOR			# print
+	| SEPARATOR								# blankExpr;
 
-expr: expr op = ( '*' | '/' | '%' ) expr                # MulDivMod
-    | expr op =( '+' | '-' ) expr                       # AddSub
-    | expr op =( '<' | '<=' | '>' | '>=' | '==' ) expr  # Compare
-    | FUNCTION params block                             # FuncDec
-    | expr args                                         # FuncApp
-    | VAR ID ASSIGN expr                                # VarDec
-    | ID                                                # VarRef
-    | ID ASSIGN expr                                    # Assignment
-    | INT                                               # int
-    | BOOL                                              # bool
-    | NULL                                              # null
-    | '(' expr ')'                                      # parens
-    ;
+expr:
+	'(' expr ')'							 # parens
+	| expr op = ('+' | '-') expr			 # AddSub
+	| expr '(' arglist? ')'					 # funcApp
+    | expr op = ('*' | '/' | '%') expr	     # MulDivMod
+	| expr op = ('<' | '<=' | '>' | '>=' | '==') expr	# Compare
+	| FUNCTION IDENTIFIER '(' idlist? ')' block			# FuncDec
+	| FUNCTION '(' idlist? ')' block					# AnonFuncDec
+	| IDENTIFIER										# VarRef
+	| VAR IDENTIFIER '=' expr							# VarDec
+	| IDENTIFIER '=' expr								# Assignment
+	| INT												# int
+	| BOOL												# boolean
+	| NULL												# null;
 
-block: '{' stat* '}'                                    # fullBlock
-     | stat                                             # simpBlock
-     ;
-params: '(' (ID (',' ID)* )? ')' ;
 
-args: '(' (expr (',' expr)* )? ')' ;
+arglist: expr (',' expr)*;
+
+idlist: IDENTIFIER (',' IDENTIFIER)*;
+
+block: '{' stat* '}' # fullBlock | stat # simpleBlock;

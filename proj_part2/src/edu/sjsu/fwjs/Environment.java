@@ -1,16 +1,18 @@
 package edu.sjsu.fwjs;
 
 import java.util.Map;
+
 import java.util.HashMap;
 
 public class Environment {
-    private Map<String,Value> env = new HashMap<String,Value>();
+    public Map<String, Value> env = new HashMap<String, Value>();
     private Environment outerEnv;
 
     /**
      * Constructor for global environment
      */
-    public Environment() {}
+    public Environment() {
+    }
 
     /**
      * Constructor for local environment of a function
@@ -27,8 +29,12 @@ public class Environment {
      * null is returned (similar to how JS returns undefined.
      */
     public Value resolveVar(String varName) {
-        // YOUR CODE HERE
-        return null;
+        if (env.containsKey(varName)) {
+            return env.get(varName);
+        } else if (outerEnv != null) {
+            return outerEnv.resolveVar(varName);
+        } else
+            throw new RuntimeException("Variable undefined");
     }
 
     /**
@@ -36,8 +42,28 @@ public class Environment {
      * If a variable has not been defined previously in the current scope,
      * or any of the function's outer scopes, the var is stored in the global scope.
      */
-    public void updateVar(String key, Value v) {
-        // YOUR CODE HERE
+    public void updateVar(String varName, Value v) {
+        if (env.containsKey(varName)) {
+            env.put(varName, v);
+        } else if (outerEnv != null) {
+            outerEnv.updateVar(varName, v);
+        } else
+            env.put(varName, v);
+    }
+    /**
+     * Sets a variable with a given key in the env HashMap.
+     * @param key variable reference.
+     * @param v variable value.
+     */
+    public void setVar(String key, Value v) {
+        env.put(key, v);
+    }
+    /**
+     * Gets the Environment outside of this Environment.
+     * @return the outer Environment or null if there is none.
+     */
+    public Environment getOuterEnv() {
+        return outerEnv;
     }
 
     /**
@@ -45,7 +71,11 @@ public class Environment {
      * If the variable has been defined in the current scope previously,
      * a RuntimeException is thrown.
      */
-    public void createVar(String key, Value v) {
-        // YOUR CODE HERE
+    public void createVar(String varName, Value v) throws RuntimeException {
+        if (!env.containsKey(varName)) {
+            env.put(varName, v);
+        } else {
+            throw new RuntimeException("Variable exists");
+        }
     }
 }
