@@ -15,12 +15,14 @@ that were in scope when the function was first defined to still
 be in scope when we later call the function, even if we call
 the function in a completely different context.
  */
+
 var getNextInt = function(){
-    var nextInt = 0 
+    
     return function(){
         return nextInt++;
     }
 }();
+ nextInt = 0 
 var print = console.log
 print(getNextInt())
 print(getNextInt())
