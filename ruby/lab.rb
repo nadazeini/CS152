@@ -23,7 +23,7 @@ class Shrink
   #use substring alike
   
       if blather.start_with?("are you")
-        blather.sub!(/\b(are you)\b/,"IS IT IMPORTANT THAT I AM")
+        blather.sub!(/are you/,"IS IT IMPORTANT THAT I AM")
       end
       if blather.start_with?("well,")
         blather.slice!("well,")
@@ -54,7 +54,7 @@ class Shrink
       blather.gsub!(/\bi\b/,'you')
   
       #Sub in past references, but only for the 1st occurrence or it looks weird
-      blather.sub!(/\b(he|him)\b/, @he)
+      blather.sub!(/(he|him)/, @he)
       blather.sub!(/\b(she|her)\b/, @she)
   #they
   blather.sub!(/\b(they|them)\b/, @they)
