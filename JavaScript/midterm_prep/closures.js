@@ -17,12 +17,11 @@ the function in a completely different context.
  */
 
 var getNextInt = function(){
-    
+    var nextInt= 0;    
     return function(){
         return nextInt++;
     }
 }();
- nextInt = 0 
 var print = console.log
 print(getNextInt())
 print(getNextInt())

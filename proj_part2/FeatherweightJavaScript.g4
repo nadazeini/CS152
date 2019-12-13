@@ -58,9 +58,9 @@ stat:
 
 expr:
 	'(' expr ')'							 # parens
-	| expr op = ('+' | '-') expr			 # AddSub
 	| expr '(' arglist? ')'					 # funcApp
-    | expr op = ('*' | '/' | '%') expr	     # MulDivMod
+	| expr op = ('*' | '/' | '%') expr	     # MulDivMod
+	| expr op = ('+' | '-') expr			 # AddSub
 	| expr op = ('<' | '<=' | '>' | '>=' | '==') expr	# Compare
 	| FUNCTION IDENTIFIER '(' idlist? ')' block			# FuncDec
 	| FUNCTION '(' idlist? ')' block					# AnonFuncDec

@@ -3,7 +3,7 @@ function Student(firstName, lastName, studentID) {
     this.lastName = lastName;
     this.studentID = studentID;
     this.display = function () {
-        console.log(tqhis.firstName + " " + this.lastName + " " + this.studentID);
+        console.log(this.firstName + " " + this.lastName + " " + this.studentID);
     }
 }
 

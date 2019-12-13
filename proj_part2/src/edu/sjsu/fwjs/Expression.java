@@ -2,6 +2,10 @@ package edu.sjsu.fwjs;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+/**
+ * Nada Cs152 new
+ */
 
 /**
  * FWJS expressions.
@@ -62,52 +66,71 @@ class PrintExpr implements Expression {
  */
 class BinOpExpr implements Expression {
     private Op op;
-    private Expression e1;
-    private Expression e2;
+    private List<Expression> exprs;
 
     public BinOpExpr(Op op, Expression e1, Expression e2) {
         this.op = op;
-        this.e1 = e1;
-        this.e2 = e2;
+        this.exprs = new ArrayList();
+        this.exprs.add(e1);
+        this.exprs.add(e2);
     }
 
 
     @SuppressWarnings("incomplete-switch")
 
     public Value evaluate(Environment env) {
+        List<Value> vs = this.exprs.stream().map(x -> x.evaluate(env)).collect(Collectors.toList());
+        Boolean nullFlag = vs.stream().anyMatch(x -> (x == null));
+        Boolean closureFlag = vs.stream().anyMatch(x -> (x instanceof ClosureVal));
 
-        int v1 = ((IntVal) e1.evaluate(env)).toInt();
-        int v2 = ((IntVal) e2.evaluate(env)).toInt();
+        List<Integer> vals = vs.stream().map(
+                x -> {
+                    if (x instanceof BoolVal)
+                        return ((BoolVal) x).toBoolean() ? 1 : 0;
+                    else if (x instanceof NullVal)
+                        return 0;
+                    else if (x instanceof ClosureVal)
+                        return -1;
+                    return ((IntVal) x).toInt();
+                }
+        ).collect(Collectors.toList());
+        int x = vals.get(0);
+        int y = vals.get(1);
 
+        if (nullFlag || closureFlag) {
+            if (op.equals(Op.EQ)) {
+                return new BoolVal(vs.get(0).equals(vs.get(1)));
+            } else if (!nullFlag)
+                throw new RuntimeException("Cannot compare with closure");
+        }
         switch (op) {
-            case LT:
-                return new BoolVal(v1 < v2);
-            case LE:
-                return new BoolVal(v1 <= v2);
-            case EQ:
-                return new BoolVal(v1 == v2);
-
             case ADD:
-                return new IntVal(v1 + v2);
-            case SUBTRACT:
-                return new IntVal(v1 - v2);
-            case MULTIPLY:
-                return new IntVal(v1 * v2);
+                return new IntVal(x + y);
             case DIVIDE:
-                return new IntVal(v1 / v2);
-            case MOD:
-                return new IntVal(v1 % v2);
-            case GT:
-                return new BoolVal(v1 > v2);
+                return new IntVal(x / y);
+            case EQ:
+                return new BoolVal(x == y);
             case GE:
-                return new BoolVal(v1 >= v2);
-
+                return new BoolVal(x >= y);
+            case GT:
+                return new BoolVal(x > y);
+            case LE:
+                return new BoolVal(x <= y);
+            case LT:
+                return new BoolVal(x < y);
+            case MOD:
+                return new IntVal(x % y);
+            case MULTIPLY:
+                return new IntVal(x * y);
+            case SUBTRACT:
+                return new IntVal(x - y);
             default:
                 return new NullVal();
 
         }
     }
 }
+
 
 /**
  * If-then-else expressions.
@@ -269,13 +292,15 @@ class FunctionAppExpr implements Expression {
     /**
      * A function declaration, which evaluates to a closure.
      */
-    class AnonFunctionDeclExpr implements Expression {
+    static class AnonFunctionDeclExpr implements Expression {
         private List<String> params;
         private Expression body;
+
         public AnonFunctionDeclExpr(List<String> params, Expression body) {
             this.params = params;
             this.body = body;
         }
+
         public Value evaluate(Environment env) {
             return new ClosureVal(params, body, env);
         }

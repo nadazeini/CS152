@@ -35,6 +35,7 @@ class VirtualMachine
         v1 = @stack.pop
         v2 = @stack.pop
         @stack.push(v2 * v1)
+
         else
           raise "Unrecognized command: '#{ln}'"
         end

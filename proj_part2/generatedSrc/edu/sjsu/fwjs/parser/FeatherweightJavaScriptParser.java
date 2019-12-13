@@ -588,31 +588,31 @@ public class FeatherweightJavaScriptParser extends Parser {
 					switch ( getInterpreter().adaptivePredict(_input,6,_ctx) ) {
 					case 1:
 						{
-						_localctx = new AddSubContext(new ExprContext(_parentctx, _parentState));
-						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(82);
-						if (!(precpred(_ctx, 12))) throw new FailedPredicateException(this, "precpred(_ctx, 12)");
-						setState(83);
-						((AddSubContext)_localctx).op = _input.LT(1);
-						_la = _input.LA(1);
-						if ( !(_la==PLUS || _la==SUB) ) {
-							((AddSubContext)_localctx).op = (Token)_errHandler.recoverInline(this);
-						}
-						consume();
-						setState(84); expr(13);
-						}
-						break;
-					case 2:
-						{
 						_localctx = new MulDivModContext(new ExprContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(85);
-						if (!(precpred(_ctx, 10))) throw new FailedPredicateException(this, "precpred(_ctx, 10)");
-						setState(86);
+						setState(82);
+						if (!(precpred(_ctx, 11))) throw new FailedPredicateException(this, "precpred(_ctx, 11)");
+						setState(83);
 						((MulDivModContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
 						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << MUL) | (1L << DIV) | (1L << MOD))) != 0)) ) {
 							((MulDivModContext)_localctx).op = (Token)_errHandler.recoverInline(this);
+						}
+						consume();
+						setState(84); expr(12);
+						}
+						break;
+					case 2:
+						{
+						_localctx = new AddSubContext(new ExprContext(_parentctx, _parentState));
+						pushNewRecursionContext(_localctx, _startState, RULE_expr);
+						setState(85);
+						if (!(precpred(_ctx, 10))) throw new FailedPredicateException(this, "precpred(_ctx, 10)");
+						setState(86);
+						((AddSubContext)_localctx).op = _input.LT(1);
+						_la = _input.LA(1);
+						if ( !(_la==PLUS || _la==SUB) ) {
+							((AddSubContext)_localctx).op = (Token)_errHandler.recoverInline(this);
 						}
 						consume();
 						setState(87); expr(11);
@@ -639,7 +639,7 @@ public class FeatherweightJavaScriptParser extends Parser {
 						_localctx = new FuncAppContext(new ExprContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
 						setState(91);
-						if (!(precpred(_ctx, 11))) throw new FailedPredicateException(this, "precpred(_ctx, 11)");
+						if (!(precpred(_ctx, 12))) throw new FailedPredicateException(this, "precpred(_ctx, 12)");
 						setState(92); match(T__2);
 						setState(94);
 						_la = _input.LA(1);
@@ -881,10 +881,10 @@ public class FeatherweightJavaScriptParser extends Parser {
 	}
 	private boolean expr_sempred(ExprContext _localctx, int predIndex) {
 		switch (predIndex) {
-		case 0: return precpred(_ctx, 12);
+		case 0: return precpred(_ctx, 11);
 		case 1: return precpred(_ctx, 10);
 		case 2: return precpred(_ctx, 9);
-		case 3: return precpred(_ctx, 11);
+		case 3: return precpred(_ctx, 12);
 		}
 		return true;
 	}
@@ -899,7 +899,7 @@ public class FeatherweightJavaScriptParser extends Parser {
 		"\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\5\4a\n\4\3\4\7\4d\n\4\f\4\16\4g\13\4"+
 		"\3\5\3\5\3\5\7\5l\n\5\f\5\16\5o\13\5\3\6\3\6\3\6\7\6t\n\6\f\6\16\6w\13"+
 		"\6\3\7\3\7\7\7{\n\7\f\7\16\7~\13\7\3\7\3\7\5\7\u0082\n\7\3\7\2\3\6\b\2"+
-		"\4\6\b\n\f\2\5\3\2\25\26\4\2\21\22\27\27\3\2\30\34\u0096\2\17\3\2\2\2"+
+		"\4\6\b\n\f\2\5\4\2\21\22\27\27\3\2\25\26\3\2\30\34\u0096\2\17\3\2\2\2"+
 		"\4\61\3\2\2\2\6R\3\2\2\2\bh\3\2\2\2\np\3\2\2\2\f\u0081\3\2\2\2\16\20\5"+
 		"\4\3\2\17\16\3\2\2\2\20\21\3\2\2\2\21\17\3\2\2\2\21\22\3\2\2\2\22\3\3"+
 		"\2\2\2\23\24\5\6\4\2\24\25\7\23\2\2\25\62\3\2\2\2\26\27\7\b\2\2\27\30"+
@@ -915,14 +915,14 @@ public class FeatherweightJavaScriptParser extends Parser {
 		"\7\2GH\7\13\2\2HJ\7\5\2\2IK\5\n\6\2JI\3\2\2\2JK\3\2\2\2KL\3\2\2\2LM\7"+
 		"\6\2\2MS\5\f\7\2NS\7\35\2\2OS\7\16\2\2PS\7\17\2\2QS\7\20\2\2R\63\3\2\2"+
 		"\2R8\3\2\2\2R;\3\2\2\2R?\3\2\2\2RG\3\2\2\2RN\3\2\2\2RO\3\2\2\2RP\3\2\2"+
-		"\2RQ\3\2\2\2Se\3\2\2\2TU\f\16\2\2UV\t\2\2\2Vd\5\6\4\17WX\f\f\2\2XY\t\3"+
-		"\2\2Yd\5\6\4\rZ[\f\13\2\2[\\\t\4\2\2\\d\5\6\4\f]^\f\r\2\2^`\7\5\2\2_a"+
-		"\5\b\5\2`_\3\2\2\2`a\3\2\2\2ab\3\2\2\2bd\7\6\2\2cT\3\2\2\2cW\3\2\2\2c"+
-		"Z\3\2\2\2c]\3\2\2\2dg\3\2\2\2ec\3\2\2\2ef\3\2\2\2f\7\3\2\2\2ge\3\2\2\2"+
-		"hm\5\6\4\2ij\7\7\2\2jl\5\6\4\2ki\3\2\2\2lo\3\2\2\2mk\3\2\2\2mn\3\2\2\2"+
-		"n\t\3\2\2\2om\3\2\2\2pu\7\35\2\2qr\7\7\2\2rt\7\35\2\2sq\3\2\2\2tw\3\2"+
-		"\2\2us\3\2\2\2uv\3\2\2\2v\13\3\2\2\2wu\3\2\2\2x|\7\3\2\2y{\5\4\3\2zy\3"+
-		"\2\2\2{~\3\2\2\2|z\3\2\2\2|}\3\2\2\2}\177\3\2\2\2~|\3\2\2\2\177\u0082"+
+		"\2RQ\3\2\2\2Se\3\2\2\2TU\f\r\2\2UV\t\2\2\2Vd\5\6\4\16WX\f\f\2\2XY\t\3"+
+		"\2\2Yd\5\6\4\rZ[\f\13\2\2[\\\t\4\2\2\\d\5\6\4\f]^\f\16\2\2^`\7\5\2\2_"+
+		"a\5\b\5\2`_\3\2\2\2`a\3\2\2\2ab\3\2\2\2bd\7\6\2\2cT\3\2\2\2cW\3\2\2\2"+
+		"cZ\3\2\2\2c]\3\2\2\2dg\3\2\2\2ec\3\2\2\2ef\3\2\2\2f\7\3\2\2\2ge\3\2\2"+
+		"\2hm\5\6\4\2ij\7\7\2\2jl\5\6\4\2ki\3\2\2\2lo\3\2\2\2mk\3\2\2\2mn\3\2\2"+
+		"\2n\t\3\2\2\2om\3\2\2\2pu\7\35\2\2qr\7\7\2\2rt\7\35\2\2sq\3\2\2\2tw\3"+
+		"\2\2\2us\3\2\2\2uv\3\2\2\2v\13\3\2\2\2wu\3\2\2\2x|\7\3\2\2y{\5\4\3\2z"+
+		"y\3\2\2\2{~\3\2\2\2|z\3\2\2\2|}\3\2\2\2}\177\3\2\2\2~|\3\2\2\2\177\u0082"+
 		"\7\4\2\2\u0080\u0082\5\4\3\2\u0081x\3\2\2\2\u0081\u0080\3\2\2\2\u0082"+
 		"\r\3\2\2\2\16\21\61CJR`cemu|\u0081";
 	public static final ATN _ATN =
